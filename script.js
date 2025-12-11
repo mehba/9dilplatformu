@@ -1,5 +1,5 @@
 // --- API Ayarları ---
-const apiKey = "AIzaSyA8oYfmOItrx2IBh8ZhPqS6sXGBMGA4fco"; // Kendi API anahtarınızı buraya ekleyebilirsiniz.
+const apiKey = "AIzaSyA8o-fmOİrx2Hh8ZhPqPqS6GBM6fco"; // Kendi API anahtarınızı buraya ekleyebilirsiniz.
 const nanoBananaApiUrl = `https://generativelanguage.googleapis.com/v1beta/models/imagen-4.0-generate-001:predict?key=${apiKey}`;
 const textApiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`;
 
@@ -227,6 +227,8 @@ async function performSearch() {
 
     searchButton.disabled = true;
     searchButton.textContent = 'Aranıyor... (Çeviri oluşturuluyor)';
+    
+    // YENİ: Başlangıçta sonucu gizle, ancak süreç içindeki hatalarda gizlemeyeceğiz.
     hideResult();
 
     try {
@@ -275,23 +277,34 @@ async function performSearch() {
         resultImage.classList.add('hidden'); 
         imageLoader.classList.remove('hidden'); 
 
-        // 4. Adım: Resim
-        const imageUrl = await generateImage(finalWord, targetLang); 
-        
-        // 5. Adım: Resmi göster
-        resultImage.src = imageUrl;
-        resultImage.alt = `${finalWord} için görsel`;
-        resultImage.classList.remove('hidden');
-        imageLoader.classList.add('hidden');
+        // 4. Adım: Resim (DÜZELTME: Resim hatasını ayrıca yakala, böylece metin silinmez)
+        try {
+            const imageUrl = await generateImage(finalWord, targetLang); 
+            // Resmi göster
+            resultImage.src = imageUrl;
+            resultImage.alt = `${finalWord} için görsel`;
+            resultImage.classList.remove('hidden');
+        } catch (imageError) {
+            console.error("Resim oluşturma hatası:", imageError);
+            // Resim yerine placeholder göster
+            resultImage.src = 'https://placehold.co/600x400/e0e0e0/b0b0b0?text=Görsel+Oluşturulamadı';
+            resultImage.alt = 'Görsel yüklenemedi.';
+            resultImage.classList.remove('hidden');
+            showMessage("Metinler hazır ancak resim oluşturulamadı.", true); // Hafif uyarı
+        } finally {
+             imageLoader.classList.add('hidden');
+        }
 
     } catch (error) {
+        // Genel (Metin/Çeviri) hatası
         const userMessage = error.message.includes("verisi alınamadı") 
             ? `Hata: ${error.message}. Lütfen girdiğiniz kelimeyi kontrol edin veya başka bir kelime deneyin.`
             : 'Beklenmeyen bir hata oluştu. Lütfen tekrar deneyin.';
 
         console.error('Arama sırasında hata:', error);
         showMessage(userMessage);
-        hideResult();
+        // DÜZELTME: Hata durumunda var olan sonucu gizleme (kullanıcı kısmi sonuç görebilsin)
+        // hideResult();  <-- Bu satırı kaldırdık.
     } finally {
         searchButton.disabled = false;
         searchButton.textContent = 'Ara';
