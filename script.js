@@ -1,5 +1,5 @@
 // --- API Ayarları ---
-const apiKey = ""; // Kendi API anahtarınızı buraya ekleyebilirsiniz.
+const apiKey = "AIzaSyA8oYfmOItrx2IBh8ZhPqS6sXGBMGA4fco"; // Kendi API anahtarınızı buraya ekleyebilirsiniz.
 const nanoBananaApiUrl = `https://generativelanguage.googleapis.com/v1beta/models/imagen-4.0-generate-001:predict?key=${apiKey}`;
 const textApiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`;
 
