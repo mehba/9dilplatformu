@@ -1,0 +1,44 @@
+/* Inter yazı tipini varsayılan olarak ayarla */
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: #f8fafc;
+}
+/* Sonuç kartı için yumuşak bir geçiş efekti */
+#result-card {
+    transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+    opacity: 0;
+    transform: translateY(20px);
+    visibility: hidden; 
+}
+#result-card.visible {
+    opacity: 1;
+    transform: translateY(0);
+    visibility: visible;
+}
+/* Buton devre dışı iken stili */
+#search-button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+}
+/* Buton için modern bir hover/aktif stil */
+.animated-button:active {
+    transform: scale(0.98);
+}
+/* Başlık ikonları için stil */
+.header-icon {
+    display: inline-block;
+    vertical-align: middle;
+    margin: 0 8px;
+    width: 32px;
+    height: 32px;
+}
+/* Ses butonu animasyonu */
+.speaking {
+    animation: pulse-ring 1.5s cubic-bezier(0.215, 0.61, 0.355, 1) infinite;
+}
+@keyframes pulse-ring {
+    0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(99, 102, 241, 0.7); }
+    70% { transform: scale(1.1); box-shadow: 0 0 0 10px rgba(99, 102, 241, 0); }
+    100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(99, 102, 241, 0); }
+}
