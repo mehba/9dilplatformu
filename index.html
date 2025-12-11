@@ -1,119 +1,13 @@
-<!DOCTYPE html>
-<html lang="tr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dil Gelişim Platformu</title>
-    <!-- Tailwind CSS CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Inter yazı tipi -->
-    <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
-    <!-- Harici CSS Dosyası -->
-    <link rel="stylesheet" href="style.css">
-</head>
-<body class="min-h-screen flex items-center justify-center p-4">
+v3.0
+ Dil Gelişim Platformu  
+Öğren, Keşfet, Geliş!
+Hedef Dil English (EN) Italiano (IT) Türkçe (TR) Español (ES) Deutsch (DE) Français (FR) 日本語 (JA) العربية (AR) Русский (RU) 
+Türkçe Kelime 
+Ara 
 
-    <!-- Ana Konteyner -->
-    <div class="w-full max-w-2xl bg-white rounded-3xl shadow-2xl p-8 md:p-12 border-4 border-indigo-100">
-        
-        <!-- Başlık Alanı -->
-        <header class="text-center mb-10">
-            <h1 class="text-4xl md:text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-indigo-600 flex items-center justify-center">
-                <img src="https://img.icons8.com/plasticine/100/search--v2.png" alt="Search icon" class="header-icon"> 
-                Dil Gelişim Platformu
-                <img src="https://img.icons8.com/plasticine/100/book--v2.png" alt="Book icon" class="header-icon">
-            </h1>
-            <p class="text-xl text-gray-500 mt-3">Öğren, Keşfet, Geliş!</p>
-        </header>
 
-        <!-- Arama Formu Alanı -->
-        <div class="flex flex-col md:flex-row gap-4 mb-6">
-            
-            <!-- Dil Seçimi -->
-            <div class="flex-1">
-                <label for="language-select" class="block text-sm font-semibold text-gray-700 mb-1">Hedef Dil Seçin</label>
-                <select id="language-select" class="w-full h-12 px-4 py-2 border border-indigo-300 rounded-xl shadow-md focus:outline-none focus:ring-4 focus:ring-indigo-200 focus:border-indigo-500 text-lg transition duration-200">
-                    <option value="en">English (EN)</option>
-                    <option value="it">Italiano (IT)</option>
-                    <option value="tr">Türkçe (TR)</option>
-                    <option value="es">Español (ES)</option>
-                    <option value="de">Deutsch (DE)</option>
-                    <option value="fr">Français (FR)</option>
-                    <option value="ja">日本語 (JA)</option>
-                    <option value="ar">العربية (AR)</option>
-                    <option value="ru">Русский (RU)</option>
-                </select>
-            </div>
 
-            <!-- Kelime Arama -->
-            <div class="flex-[2]">
-                <label for="search-input" class="block text-sm font-semibold text-gray-700 mb-1">Türkçe Kelime Girin</label>
-                <input type="text" id="search-input" placeholder="Örn: macera, yıldız, öğrenmek..." class="w-full h-12 px-4 py-2 border border-indigo-300 rounded-xl shadow-md focus:outline-none focus:ring-4 focus:ring-indigo-200 focus:border-indigo-500 text-lg transition duration-200">
-            </div>
 
-        </div>
-        
-        <!-- Arama Butonu -->
-        <button id="search-button" class="animated-button w-full bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white font-bold text-lg py-3 px-6 rounded-xl shadow-lg transition duration-300 ease-in-out transform hover:-translate-y-0.5 hover:shadow-xl">
-            Ara
-        </button>
 
-        <!-- Sonuç Alanı -->
-        <div id="result-container" class="mt-10">
-            
-            <!-- Hata veya Bilgi Mesajı -->
-            <div id="message-box" class="text-center text-red-600 font-semibold hidden p-4 bg-red-100 rounded-xl border border-red-300"></div>
-
-            <!-- Sonuç Kartı -->
-            <div id="result-card" class="bg-indigo-50 rounded-2xl shadow-xl overflow-hidden border-2 border-indigo-200">
-                
-                <!-- Kelime Başlığı -->
-                <div class="bg-indigo-100 border-b border-indigo-200 p-6 flex items-center justify-center relative">
-                     <h2 id="result-word" class="text-4xl font-extrabold text-gray-800 text-center capitalize"></h2>
-                     <button id="header-speak-btn" class="ml-3 p-2 rounded-full hover:bg-indigo-200 transition-colors hidden" title="Kelimeyi Dinle">
-                        <svg class="w-8 h-8 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z"></path></svg>
-                     </button>
-                </div>
-                
-                <!-- Resim Alanı -->
-                <div id="image-container" class="w-full h-64 bg-indigo-50 relative flex items-center justify-center text-center">
-                    
-                    <!-- Çeviri Kutusu -->
-                    <div id="translation-overlay" class="absolute top-3 right-3 m-1 p-2 bg-indigo-600 bg-opacity-90 text-white font-extrabold text-xl rounded-lg shadow-xl hidden flex items-center gap-2 z-10">
-                        <span id="translation-text"></span>
-                        <button id="overlay-speak-btn" class="p-1.5 rounded-full hover:bg-white hover:bg-opacity-20 transition-colors" title="Kelimeyi Dinle">
-                            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z"></path></svg>
-                        </button>
-                    </div>
-
-                    <!-- Yükleniyor Göstergesi -->
-                    <div id="image-loader" class="hidden">
-                        <svg class="animate-spin h-10 w-10 text-purple-600 mx-auto" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-                            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                        </svg>
-                        <p class="mt-3 font-semibold text-purple-600">Resim oluşturuluyor, sabredin...</p>
-                    </div>
-                    <!-- Resmin Kendisi -->
-                    <img id="result-image" src="" alt="Kelime görseli" class="w-full h-64 object-cover hidden" 
-                         onerror="this.src='https://placehold.co/600x400/e0e0e0/b0b0b0?text=Görsel+Yüklenemedi'; this.alt='Görsel yüklenemedi.'; this.classList.remove('hidden'); document.getElementById('image-loader').classList.add('hidden');">
-                </div>
-                
-                <!-- Açıklama ve Cümle Ses Butonu -->
-                <div class="bg-white p-6">
-                    <p id="result-description" class="text-lg text-gray-700 mb-4"></p>
-                    <div class="flex justify-end">
-                        <button id="description-speak-btn" class="flex items-center gap-2 text-indigo-600 font-semibold hover:text-indigo-800 hover:bg-indigo-50 px-4 py-2 rounded-lg transition-colors">
-                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z"></path></svg>
-                            Cümleyi Dinle
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Harici JS Dosyası -->
-    <script src="script.js"></script>
-</body>
-</html>
+Görsel hazırlanıyor...
+Cümleyi Dinle 
